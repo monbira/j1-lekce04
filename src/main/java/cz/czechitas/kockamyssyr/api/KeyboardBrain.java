@@ -1,9 +1,13 @@
 package cz.czechitas.kockamyssyr.api;
 
-import cz.czechitas.kockamyssyr.engine.swing.*;
-import net.sevecek.util.*;
-import net.sevecek.util.swing.*;
+import cz.czechitas.kockamyssyr.engine.swing.MainWindow;
+import cz.czechitas.kockamyssyr.engine.swing.Utils;
+import net.sevecek.util.ThreadUtils;
+import net.sevecek.util.swing.JKeyboard;
 
+/**
+ * Mozek, který ovládá daného hráče pomocí klávesnice.
+ */
 public class KeyboardBrain implements Brain {
 
     private int keyCodeLeft;
@@ -11,10 +15,20 @@ public class KeyboardBrain implements Brain {
     private int keyCodeRight;
     private int keyCodeDown;
 
+    /**
+     * Vytvoří mozek ovládaný pomocí standardních kláves – šipek.
+     */
     public KeyboardBrain() {
         this(KeyCode.UP, KeyCode.LEFT, KeyCode.DOWN, KeyCode.RIGHT);
     }
 
+    /**
+     * Vytvoří mozek ovládaný pomocí alternativních kláves.
+     * @param keyCodeUp
+     * @param keyCodeLeft
+     * @param keyCodeDown
+     * @param keyCodeRight
+     */
     public KeyboardBrain(KeyCode keyCodeUp, KeyCode keyCodeLeft, KeyCode keyCodeDown, KeyCode keyCodeRight) {
         this.keyCodeLeft = keyCodeLeft.getKeyEventVkCode();
         this.keyCodeUp = keyCodeUp.getKeyEventVkCode();

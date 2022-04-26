@@ -2,6 +2,8 @@ package cz.czechitas.kockamyssyr;
 
 import cz.czechitas.kockamyssyr.api.*;
 
+import java.awt.*;
+
 /**
  * Hlaví třída pro hru Kočka–myš–sýr.
  */
@@ -20,22 +22,22 @@ public class HlavniProgram {
      * Hlavní metoda obsahující výkonný kód.
      */
     public void run() {
-        new Tree(400, 200);
-        new Tree(400, 200);
-        new Tree(400, 200);
-        new Tree(400, 200);
+        new Tree(new Point(400, 200));
+        new Tree(new Point(400, 200));
+        new Tree(new Point(400, 200));
+        new Tree(new Point(400, 200));
         // TODO: Sem vepište svůj program
 
-        new Cat(50, 100);
-        Cat tom = new Cat(100, 100);
+        new Cat(new Point(50, 100));
+        Cat tom = new Cat(new Point(100, 100));
         tom.setBrain(new KeyboardBrain());
 
-        new Cheese(200, 200);
+        new Cheese(new Point(200, 200));
 
-        Mouse jerry = new Mouse(600, 200);
+        Mouse jerry = new Mouse(new Point(600, 200));
         jerry.setBrain(new KeyboardBrain(KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D));
 
-        new Meat(200, 500);
+        new Meat(new Point(200, 500));
     }
 
 }

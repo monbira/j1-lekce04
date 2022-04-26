@@ -1,20 +1,18 @@
 package cz.czechitas.kockamyssyr.api;
 
-import javax.swing.*;
-import cz.czechitas.kockamyssyr.engine.*;
-import cz.czechitas.kockamyssyr.engine.swing.*;
+import java.awt.*;
 
+/**
+ * Kočka, která se snaží ulovit myš.
+ */
 public class Cat extends FourWayPlayer {
 
+    public Cat(Point point) {
+        super(point, PlayerType.BAD, "cat-left.png", "cat-down.png", "cat-up.png", "cat-right.png");
+    }
+
     public Cat(int x, int y) {
-        Utils.invokeAndWait(() -> {
-            Icon rightImage = Utils.loadSprite("cat-right.png");
-            Icon leftImage = Utils.loadSprite("cat-left.png");
-            Icon downImage = Utils.loadSprite("cat-down.png");
-            Icon upImage = Utils.loadSprite("cat-up.png");
-            init(leftImage, rightImage, upImage, downImage, x, y, PlayerType.BAD);
-        });
-        Gameplay.getInstance().addPlayer(this);
+        super(x, y, PlayerType.BAD, "cat-left.png", "cat-down.png", "cat-up.png", "cat-right.png");
     }
 
 }

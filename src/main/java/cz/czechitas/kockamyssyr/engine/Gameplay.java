@@ -1,15 +1,18 @@
 package cz.czechitas.kockamyssyr.engine;
 
-import java.util.*;
-import java.util.List;
-import java.util.concurrent.*;
-import javax.swing.*;
 import cz.czechitas.kockamyssyr.api.*;
-import cz.czechitas.kockamyssyr.engine.swing.*;
-import net.sevecek.util.*;
+import cz.czechitas.kockamyssyr.engine.swing.MainWindow;
+import cz.czechitas.kockamyssyr.engine.swing.Utils;
+import net.sevecek.util.ThreadUtils;
+
+import javax.swing.*;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.*;
 
 import static cz.czechitas.kockamyssyr.api.CollisionType.*;
-import static cz.czechitas.kockamyssyr.api.PlayerType.*;
+import static cz.czechitas.kockamyssyr.api.PlayerType.FOOD;
+import static cz.czechitas.kockamyssyr.api.PlayerType.GOOD;
 
 public class Gameplay {
 

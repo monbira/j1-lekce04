@@ -1,7 +1,9 @@
 package cz.czechitas.kockamyssyr.api;
 
+import cz.czechitas.kockamyssyr.engine.swing.Utils;
+
 import javax.swing.*;
-import cz.czechitas.kockamyssyr.engine.swing.*;
+import java.awt.*;
 
 public abstract class FourWayPlayer extends Player {
 
@@ -10,21 +12,24 @@ public abstract class FourWayPlayer extends Player {
     private Icon upImage;
     private Icon rightImage;
 
-    protected FourWayPlayer() {
+    protected FourWayPlayer(Point point, PlayerType type, String leftImage, String downImage, String upImage, String rightImage) {
+        super(point, rightImage, type);
+        loadImages(leftImage, downImage, upImage, rightImage);
     }
 
-    @Override
-    @Deprecated
-    protected void init(Icon picture, int x, int y, PlayerType playerType) {
-        throw new AssertionError("This method is inaccessible");
+    protected FourWayPlayer(int x, int y, PlayerType type, String leftImage, String downImage, String upImage, String rightImage) {
+        super(x, y, rightImage, type);
+        loadImages(leftImage, downImage, upImage, rightImage);
     }
 
-    protected void init(Icon leftImage, Icon rightImage, Icon upImage, Icon downImage, int x, int y, PlayerType playerType) {
-        this.leftImage = leftImage;
-        this.downImage = downImage;
-        this.upImage = upImage;
-        this.rightImage = rightImage;
-        super.init(rightImage, x, y, playerType);
+    private void loadImages(String leftImage, String downImage, String upImage, String rightImage) {
+        Utils.invokeAndWait(() -> {
+            this.leftImage = Utils.loadSprite(leftImage);
+            this.downImage = Utils.loadSprite(downImage);
+            this.upImage = Utils.loadSprite(upImage);
+            this.rightImage = Utils.loadSprite(rightImage);
+
+        });
     }
 
     @Override

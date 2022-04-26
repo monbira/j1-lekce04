@@ -1,12 +1,16 @@
 package cz.czechitas.kockamyssyr.engine.swing;
 
-import java.io.*;
-import java.lang.reflect.*;
-import java.util.*;
-import java.util.concurrent.*;
-import javax.imageio.*;
+import net.sevecek.util.ExceptionUtils;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
-import net.sevecek.util.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
 
 public class Utils {
 

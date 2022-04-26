@@ -1,10 +1,15 @@
 package cz.czechitas.kockamyssyr.engine.swing;
 
-import java.awt.*;
-import java.awt.event.*;
+import net.miginfocom.swing.MigLayout;
+import net.sevecek.util.swing.JKeyboard;
+import net.sevecek.util.swing.SwingExceptionHandler;
+
 import javax.swing.*;
-import net.miginfocom.swing.*;
-import net.sevecek.util.swing.*;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MainWindow extends JFrame {
 

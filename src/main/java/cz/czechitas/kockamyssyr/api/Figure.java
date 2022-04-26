@@ -1,27 +1,29 @@
 package cz.czechitas.kockamyssyr.api;
 
-import java.awt.*;
-import java.util.*;
-import javax.swing.*;
-import cz.czechitas.kockamyssyr.engine.*;
-import cz.czechitas.kockamyssyr.engine.swing.*;
-import net.sevecek.util.*;
+import cz.czechitas.kockamyssyr.engine.Gameplay;
+import cz.czechitas.kockamyssyr.engine.swing.MainWindow;
+import cz.czechitas.kockamyssyr.engine.swing.Utils;
+import net.sevecek.util.ApplicationPublicException;
 
-import static cz.czechitas.kockamyssyr.api.CollisionType.*;
+import javax.swing.*;
+import java.awt.*;
+import java.util.Random;
+
+import static cz.czechitas.kockamyssyr.api.CollisionType.NO_COLLISION;
+import static cz.czechitas.kockamyssyr.api.CollisionType.STACKABLE_COLLISION;
 
 public abstract class Figure {
 
     private JLabel sprite;
     private volatile boolean isAlive = true;
 
-    protected Figure() {
+    protected Figure(Point point, String imageName) {
+        this(point.x, point.y, imageName);
     }
 
-    protected void init(Icon picture, int x, int y) {
-        if (sprite != null) {
-            throw new IllegalStateException("Already initialized");
-        }
+    protected Figure(int x, int y, String imageName) {
         Utils.invokeAndWait(() -> {
+            Icon picture = Utils.loadSprite(imageName);
             sprite = new JLabel(picture);
             sprite.setLocation(x, y);
             sprite.setSize(picture.getIconWidth(), picture.getIconHeight());

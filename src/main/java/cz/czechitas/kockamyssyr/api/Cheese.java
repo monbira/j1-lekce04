@@ -1,17 +1,18 @@
 package cz.czechitas.kockamyssyr.api;
 
-import javax.swing.*;
-import cz.czechitas.kockamyssyr.engine.*;
-import cz.czechitas.kockamyssyr.engine.swing.*;
+import java.awt.*;
 
+/**
+ * Sýr, potrava pro myš.
+ */
 public class Cheese extends Player {
 
+    public Cheese(Point point) {
+        super(point, "cheese.png", PlayerType.FOOD);
+    }
+
     public Cheese(int x, int y) {
-        Utils.invokeAndWait(() -> {
-            Icon image = Utils.loadSprite("cheese.png");
-            init(image, x, y, PlayerType.FOOD);
-        });
-        Gameplay.getInstance().addPlayer(this);
+        super(x, y, "cheese.png", PlayerType.FOOD);
     }
 
 }

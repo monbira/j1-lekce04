@@ -1,7 +1,9 @@
 package cz.czechitas.kockamyssyr.api;
 
+import cz.czechitas.kockamyssyr.engine.swing.MainWindow;
+import cz.czechitas.kockamyssyr.engine.swing.Utils;
+
 import java.awt.*;
-import cz.czechitas.kockamyssyr.engine.swing.*;
 
 /**
  * This class is just a object oriented wrapped for the Gameplay singleton

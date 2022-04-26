@@ -1,32 +1,32 @@
 package cz.czechitas.kockamyssyr.api;
 
-import java.awt.*;
-import javax.swing.*;
-import cz.czechitas.kockamyssyr.engine.*;
-import cz.czechitas.kockamyssyr.engine.swing.*;
-import net.sevecek.util.*;
+import cz.czechitas.kockamyssyr.engine.Gameplay;
+import cz.czechitas.kockamyssyr.engine.swing.Utils;
+import net.sevecek.util.ThreadUtils;
 
-import static cz.czechitas.kockamyssyr.api.CollisionType.*;
+import javax.swing.*;
+import java.awt.*;
+
+import static cz.czechitas.kockamyssyr.api.CollisionType.NO_COLLISION;
 
 public abstract class Player extends Figure {
 
     private PlayerOrientation orientation;
     private Brain brain;
-    private PlayerType type;
+    private final PlayerType type;
 
-    protected Player() {
+    protected Player(Point point, String pictureName, PlayerType type) {
+        super(point, pictureName);
+        this.type = type;
+        this.orientation = PlayerOrientation.RIGHT;
+        Gameplay.getInstance().addPlayer(this);
     }
 
-    @Override
-    @Deprecated
-    protected void init(Icon picture, int x, int y) {
-        throw new UnsupportedOperationException("This method is inaccessible. Use init(Icon picture, int x, int y, PlayerType playerType) instead.");
-    }
-
-    protected void init(Icon picture, int x, int y, PlayerType playerType) {
-        orientation = PlayerOrientation.RIGHT;
-        type = playerType;
-        super.init(picture, x, y);
+    protected Player(int x, int y, String pictureName, PlayerType type) {
+        super(x, y, pictureName);
+        this.type = type;
+        this.orientation = PlayerOrientation.RIGHT;
+        Gameplay.getInstance().addPlayer(this);
     }
 
     public Brain getBrain() {

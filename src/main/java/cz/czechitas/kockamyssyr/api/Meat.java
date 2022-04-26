@@ -1,17 +1,18 @@
 package cz.czechitas.kockamyssyr.api;
 
-import javax.swing.*;
-import cz.czechitas.kockamyssyr.engine.*;
-import cz.czechitas.kockamyssyr.engine.swing.*;
+import java.awt.*;
 
+/**
+ * Maso, potrava pro myš.
+ */
 public class Meat extends Player {
 
+    public Meat(Point point) {
+        super(point, "meat.png", PlayerType.FOOD);
+    }
+
     public Meat(int x, int y) {
-        Utils.invokeAndWait(() -> {
-            Icon image = Utils.loadSprite("meat.png");
-            init(image, x, y, PlayerType.FOOD);
-        });
-        Gameplay.getInstance().addPlayer(this);
+        super(x, y, "meat.png", PlayerType.FOOD);
     }
 
 }
