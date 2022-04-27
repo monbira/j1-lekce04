@@ -39,6 +39,10 @@ public class MainWindow extends JFrame {
         initComponents();
     }
 
+    private static GraphicsConfiguration getScreenConfiguration() {
+        return GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0].getDefaultConfiguration();
+    }
+
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         contentPane = (JPanel) getContentPane();
@@ -78,7 +82,27 @@ public class MainWindow extends JFrame {
         keyboard = new JKeyboard();
 
         pack();
-        setLocationRelativeTo(null);
+
+        String screen = System.getenv("SCREEN");
+        Component anchor = null;
+        if (screen != null) {
+            try {
+                int screenNumber = Integer.parseInt(screen);
+                GraphicsDevice[] devices = GraphicsEnvironment
+                        .getLocalGraphicsEnvironment()
+                        .getScreenDevices();
+                if (screenNumber < 0 || screenNumber >= devices.length) {
+                    System.err.printf("Chybné číslo obrazovky: '%s'.", screen).println();
+                } else {
+                    GraphicsConfiguration configuration = devices[screenNumber].getDefaultConfiguration();
+                    anchor = new JFrame(configuration);
+                }
+            } catch (NumberFormatException e) {
+                System.err.printf("Chybný formát proměnné prostředí SCREEN: '%s'.", screen).println();
+            }
+            setLocationRelativeTo(null);
+        }
+        setLocationRelativeTo(anchor);
     }
 
     private void onWindowResized(ComponentEvent evt) {
