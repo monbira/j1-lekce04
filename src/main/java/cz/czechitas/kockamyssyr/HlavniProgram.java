@@ -28,7 +28,6 @@ public class HlavniProgram {
         new Tree(new Point(400, 200));
         // TODO: Sem vepište svůj program
 
-        new Cat(new Point(50, 100));
         Cat tom = new Cat(new Point(100, 100));
         tom.setBrain(new KeyboardBrain());
 
