@@ -33,7 +33,7 @@ public abstract class FourWayPlayer extends Player {
     }
 
     @Override
-    public void setOrientation(PlayerOrientation orientation) {
+    protected void setOrientation(PlayerOrientation orientation) {
         Utils.invokeAndWait(() -> {
             super.setOrientation(orientation);
             switch (orientation) {
