@@ -32,10 +32,10 @@ public class HlavniProgram {
      */
     public void run() {
         tom = vytvorKocku();
-        tom.setBrain(new KeyboardBrain());
+        tom.setBrain(new KeyboardBrain(KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D));
 
         jerry = vytvorMys();
-        jerry.setBrain(new KeyboardBrain(KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D));
+        jerry.setBrain(new KeyboardBrain());
 
         vytvorVeci(4);
         chytMys();

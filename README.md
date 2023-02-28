@@ -5,6 +5,7 @@
 * Myš se snaží sníst jitrnici a sýr.
 * Kočka se snaží chytit myš.
 * Kočka ani myš nemohou projít skrze strom.
+* Myš se ovládá pomocí šipek, kočka pomocí kláves A, S, D, W.
 
 ## Cíl
 Pokud myš sní jitrnici i sýr, vyhrála myš. Pokud dřív kočka chytí myš, vyhrála kočka.
