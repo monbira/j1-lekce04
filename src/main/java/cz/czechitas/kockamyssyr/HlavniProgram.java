@@ -31,10 +31,10 @@ public class HlavniProgram {
      * Hlavní metoda obsahující výkonný kód.
      */
     public void run() {
-        Cat tom = vytvorKocku();
+        tom = vytvorKocku();
         tom.setBrain(new KeyboardBrain());
 
-        Mouse jerry = vytvorMys();
+        jerry = vytvorMys();
         jerry.setBrain(new KeyboardBrain(KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D));
 
         vytvorVeci(4);
