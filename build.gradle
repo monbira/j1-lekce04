@@ -21,3 +21,6 @@ application {
     mainClass = "cz.czechitas.kockamyssyr.HlavniProgram"
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
