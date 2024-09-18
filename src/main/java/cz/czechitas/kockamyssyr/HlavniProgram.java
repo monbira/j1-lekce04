@@ -32,7 +32,7 @@ public class HlavniProgram {
      */
     public void run() {
         tom = vytvorKocku();
-        tom.setBrain(new KeyboardBrain(KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D));
+        //tom.setBrain(new KeyboardBrain(KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D));
 
         jerry = vytvorMys();
         jerry.setBrain(new KeyboardBrain());
@@ -42,167 +42,102 @@ public class HlavniProgram {
     }
 
     public void chytMys() {
-        while (jerry.isAlive()){
-            jdiZaJerrymAVyhniSeStromu();
+
+        while (jerry.isAlive()) {
+
+            tomGetJerryOnX();
+            tomGetJerryOnY();
+
         }
+
+
 
     }
 
-
-    private void jdiZaJerrymAVyhniSeStromu(){
-        int horizontalniRozdil = (jerry.getX() - tom.getX());
-        if (horizontalniRozdil < 0) {
-            OtocSeVlevo();
-            while (jerry.getX() < tom.getX()){
-                vyhniSeStromu();
-                tom.moveForward();}
-        } else if (horizontalniRozdil > 0) {
-            OtocSeVpravo();
-            while (jerry.getX()> tom.getX());{
-                vyhniSeStromu();
-                tom.moveForward();}
-        }
-        int vertikalniRozdil = (jerry.getY() - tom.getY());
-        if (vertikalniRozdil < 0) {
-            OtocSeNahoru();
-            while (jerry.getY()< tom.getY()){
-                vyhniSeStromu();
-                tom.moveForward();}
-        } else if (vertikalniRozdil > 0) {
-            OtocSeDolu();
-            while (jerry.getY() > tom.getY()){
-                vyhniSeStromu();
-                tom.moveForward();
-            }
-        }
-
-    }
-    private void vyhniSeStromu(){
-        if (tom.isPossibleToMoveForward()) {
-            return;
-        }
-        tom.turnRight();
-        tom.moveForward();
-        tom.turnLeft();
-    }
-
-    private void jdiZaJerrym(){
-        int horizontalniRozdil = (jerry.getX() - tom.getX());
-        if (horizontalniRozdil < 0) {
-            OtocSeVlevo();
-            while (jerry.getX() < tom.getX()){
-                tom.moveForward();}
-        } else if (horizontalniRozdil > 0) {
-            OtocSeVpravo();
-            while (jerry.getX()> tom.getX());{
-                tom.moveForward();}
-        }
-        int vertikalniRozdil = (jerry.getY() - tom.getY());
-        if (vertikalniRozdil < 0) {
-            OtocSeNahoru();
-            while (jerry.getY()< tom.getY()){
-                tom.moveForward();}
-        } else if (vertikalniRozdil > 0) {
-            OtocSeDolu();
-            while (jerry.getY() > tom.getY()){
-                tom.moveForward();
-            }
-        }
-
-    }
-
-    private void jdiNaSouradnice(int x, int y) {
-        int horizontalniRozdil = (x - tom.getX());
-        if (horizontalniRozdil < 0) {
-            OtocSeVlevo();
-            tom.moveForward(Math.abs(horizontalniRozdil));
-        }
-        else if (horizontalniRozdil > 0) {
-            OtocSeVpravo();
-            tom.moveForward(Math.abs(horizontalniRozdil));
-        }
-
-        int vertikalniRozdil = (y - tom.getY());
-        if (vertikalniRozdil < 0) {
-            OtocSeNahoru();
-            tom.moveForward(Math.abs(vertikalniRozdil));
-        }
-        else if (vertikalniRozdil > 0) {
-            OtocSeDolu();
-            tom.moveForward(Math.abs(vertikalniRozdil));
+    private void tomGetJerryOnX() {
+        if (tom.getX() < jerry.getX()) {
+            tomTurnRight();
+            tom.moveForward();
+            dodgeTree();
+        } else if (tom.getX() > jerry.getX()) {
+            tomTurnLeft();
+            tom.moveForward();
+            dodgeTree();
+        } else if (tom.getX() == jerry.getX()) {
+            tomGetJerryOnY();
         }
     }
-    private void OtocSeDolu() {
-        if (tom.getOrientation() == PlayerOrientation.DOWN) {
-            return;
+
+    private void tomGetJerryOnY() {
+        if (tom.getY() < jerry.getY()) {
+            tomTurnDown();
+            tom.moveForward();
+            dodgeTree();
+        } else if (tom.getY() > jerry.getY()) {
+            tomTurnUp();
+            tom.moveForward();
+            dodgeTree();
+        } else if (tom.getY() == jerry.getY()) {
+            tomGetJerryOnX();
         }
-        if (tom.getOrientation() == PlayerOrientation.LEFT) {
-            tom.turnLeft();
-            return;
-        }
-        if (tom.getOrientation() == PlayerOrientation.RIGHT) {
-            tom.turnRight();
-            return;
-        }
-        tom.turnLeft();
-        tom.turnLeft();
     }
 
-    private void OtocSeVlevo() {
-        if (tom.getOrientation() == PlayerOrientation.LEFT) {
-            return;
-        }
-        if (tom.getOrientation() == PlayerOrientation.DOWN) {
-            tom.turnLeft();
-            return;
-        }
+    private void tomTurnUp() {
         if (tom.getOrientation() == PlayerOrientation.UP) {
+
+        } else if (tom.getOrientation() == PlayerOrientation.DOWN) {
+            tom.turnRight();
+            tom.turnRight();
+        } else if (tom.getOrientation() == PlayerOrientation.LEFT) {
+            tom.turnRight();
+        } else if (tom.getOrientation() == PlayerOrientation.RIGHT) {
             tom.turnLeft();
-            return;
-        }
-        if (tom.getOrientation() == PlayerOrientation.RIGHT) {
-            tom.turnLeft();
-            tom.turnLeft();
-            return;
         }
     }
 
-    private void OtocSeNahoru() {
-        if (tom.getOrientation() == PlayerOrientation.UP) {
-            return;
-        }
-        if (tom.getOrientation() == PlayerOrientation.LEFT) {
-            tom.turnRight();
-            return;
-        }
-        if (tom.getOrientation() == PlayerOrientation.RIGHT) {
-            tom.turnLeft();
-            return;
-        }
-
+    private void tomTurnDown() {
         if (tom.getOrientation() == PlayerOrientation.DOWN) {
+
+        } else if (tom.getOrientation() == PlayerOrientation.UP) {
+            tom.turnRight();
+            tom.turnRight();
+        } else if (tom.getOrientation() == PlayerOrientation.LEFT) {
             tom.turnLeft();
-            tom.turnLeft();
-            return;
+        } else if (tom.getOrientation() == PlayerOrientation.RIGHT) {
+            tom.turnRight();
         }
     }
 
-    private void OtocSeVpravo() {
-        if (tom.getOrientation() == PlayerOrientation.RIGHT) {
-            return;
-        }
-        if (tom.getOrientation() == PlayerOrientation.DOWN) {
-            tom.turnLeft();
-            return;
-        }
-        if (tom.getOrientation() == PlayerOrientation.UP) {
-            tom.turnRight();
-            return;
-        }
+    private void tomTurnLeft() {
         if (tom.getOrientation() == PlayerOrientation.LEFT) {
+
+        } else if (tom.getOrientation() == PlayerOrientation.RIGHT) {
             tom.turnRight();
             tom.turnRight();
-            return;
+        } else if (tom.getOrientation() == PlayerOrientation.UP) {
+            tom.turnLeft();
+        } else if (tom.getOrientation() == PlayerOrientation.DOWN) {
+            tom.turnRight();
+        }
+    }
+
+    private void tomTurnRight() {
+        if (tom.getOrientation() == PlayerOrientation.RIGHT) {
+
+        } else if (tom.getOrientation() == PlayerOrientation.LEFT) {
+            tom.turnRight();
+            tom.turnRight();
+        } else if (tom.getOrientation() == PlayerOrientation.UP) {
+            tom.turnRight();
+        } else if (tom.getOrientation() == PlayerOrientation.DOWN) {
+            tom.turnLeft();
+        }
+    }
+
+    private void dodgeTree() {
+        if (!tom.isPossibleToMoveForward()) {
+            tom.turnRight();
+            tom.moveForward(50);
         }
     }
 
